@@ -14,6 +14,22 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Pet> pets = Provider.of<PetsProvider>(context, listen: true).pets;
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              child: Text("Adopt App"),
+            ),
+            ListTile(
+              title: const Text("Sign Up"),
+              trailing: const Icon(Icons.login),
+              onTap: () {
+                context.push("/signup");
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Text("Pet Adopt"),
       ),
@@ -37,7 +53,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  context.read<PetsProvider>().getPetsFromService();
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(12.0),

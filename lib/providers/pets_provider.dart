@@ -13,9 +13,13 @@ class PetsProvider extends ChangeNotifier {
         gender: "male")
   ];
 
-  void getPetsFromService() async {
+  Future<void> getPetsFromService() async {
     pets = await PetServices().getPets();
     notifyListeners();
+  }
+
+  Future<void> getPetsFromServiceFirst() async {
+    pets = await PetServices().getPets();
   }
 
   // void addPetsToService() async {

@@ -25,6 +25,7 @@ class HomePage extends StatelessWidget {
               trailing: const Icon(Icons.login),
               onTap: () {
                 context.push("/signup");
+                Navigator.of(context).pop();
               },
             ),
           ],

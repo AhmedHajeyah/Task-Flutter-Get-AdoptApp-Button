@@ -15,8 +15,6 @@ class AuthServices {
   Future<String> signIn(User user) async {
     Response res = await ClientAuh.dio.post("/signin/", data: user.toJson());
     print(res.data["token"]);
-    var z = Jwt.parseJwt(res.data["token"]);
-
     return res.data["token"];
   }
 }

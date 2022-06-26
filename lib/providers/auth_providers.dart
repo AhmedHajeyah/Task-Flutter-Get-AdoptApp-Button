@@ -22,6 +22,7 @@ class AuthProviders extends ChangeNotifier {
 
   bool get isAuth {
     if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
+      var z = Jwt.parseJwt(token);
       user = User.fromJson2(Jwt.parseJwt(token));
 
       print(user);

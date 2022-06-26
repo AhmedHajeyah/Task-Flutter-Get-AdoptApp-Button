@@ -1,4 +1,5 @@
 import 'package:adopt_app/models/pet.dart';
+import 'package:adopt_app/providers/auth_providers.dart';
 import 'package:adopt_app/providers/pets_provider.dart';
 import 'package:adopt_app/widgets/pet_card.dart';
 import 'package:flutter/material.dart';
@@ -15,21 +16,45 @@ class HomePage extends StatelessWidget {
     List<Pet> pets = Provider.of<PetsProvider>(context, listen: true).pets;
     return Scaffold(
       drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              child: Text("Adopt App"),
-            ),
-            ListTile(
-              title: const Text("Sign Up"),
-              trailing: const Icon(Icons.login),
-              onTap: () {
-                context.push("/signup");
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
+        child: context.watch<AuthProviders>().isAuth
+            ? ListView(
+                children: [
+                  const DrawerHeader(
+                    child: Text("Adopt App"),
+                  ),
+                  ListTile(
+                    title: const Text("Sign Up"),
+                    trailing: const Icon(Icons.login),
+                    onTap: () {
+                      context.push("/signup");
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  ListTile(
+                    title: const Text("Sign In"),
+                    trailing: const Icon(Icons.exit_to_app),
+                    onTap: () {
+                      context.push("/signin");
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              )
+            : ListView(
+                children: [
+                  const DrawerHeader(
+                    child: Text("Adopt App"),
+                  ),
+                  ListTile(
+                    title: const Text("Logout"),
+                    trailing: const Icon(Icons.logout),
+                    onTap: () {
+                      context.push("/signin");
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
       ),
       appBar: AppBar(
         title: const Text("Pet Adopt"),

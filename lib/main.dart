@@ -1,4 +1,5 @@
 import 'package:adopt_app/pages/home_page.dart';
+import 'package:adopt_app/pages/signin_page.dart';
 import 'package:adopt_app/pages/signup_page.dart';
 import 'package:adopt_app/providers/auth_providers.dart';
 import 'package:adopt_app/providers/pets_provider.dart';
@@ -40,6 +41,10 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: "/signup",
         builder: (context, state) => SignUp(),
+      ),
+      GoRoute(
+        path: "/signin",
+        builder: (context, state) => SignIn(),
       ),
     ],
   );

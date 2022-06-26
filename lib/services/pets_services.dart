@@ -1,4 +1,5 @@
 import 'package:adopt_app/models/pet.dart';
+import 'package:adopt_app/services/client.dart';
 import 'package:dio/dio.dart';
 
 class PetServices {
@@ -7,11 +8,10 @@ class PetServices {
   Future<List<Pet>> getPets() async {
     List<Pet> pets = [];
     try {
-      Response response =
-          await dioClient.get("https://coded-pets-api-crud.herokuapp.com/pets");
+      Response response = await Client.dio.get("/pets/");
       pets = (response.data as List).map((e) => Pet.fromJson2(e)).toList();
     } on DioError catch (e) {
-      print("error");
+      print(e);
     }
     return pets;
   }
